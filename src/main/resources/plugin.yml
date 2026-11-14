@@ -1,9 +1,17 @@
-name: example_plugin
+name: mythic-voice-hook
 version: ${version}
-main: com.example.voicechatplugin.ExamplePlugin
+main: com.maeve.vcengine.voicechatplugin.MythicVoiceEngine
 api-version: ${bukkit_api_version}
 prefix: example_plugin
 authors: [ "Example Author" ]
-description: A Simple Voice Chat API plugin example
-website: https://example.com
+description: Adds custom MythicMobs triggers that make use of the Simple Voice Chat API
 depend: [ voicechat ]
+commands:
+  hse:
+    description: debugging bs
+    usage: /hse debug <on|off|status>
+    permission: mythicvoiceengine.test
+permissions:
+  mythicvoiceengine.test:
+    description: For cool people only
+    default: op
