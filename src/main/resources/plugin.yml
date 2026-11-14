@@ -5,11 +5,11 @@ api-version: ${bukkit_api_version}
 prefix: example_plugin
 authors: [ "Example Author" ]
 description: Adds custom MythicMobs triggers that make use of the Simple Voice Chat API
-depend: [ voicechat ]
+depend: [ voicechat, MythicMobs ]
 commands:
   mvh:
     description: debugging bs
-    usage: /mvh debug <on|off|status>
+    usage: /mvh <debug|simulate>
     permission: mythicvoiceengine.test
 permissions:
   mythicvoiceengine.test:

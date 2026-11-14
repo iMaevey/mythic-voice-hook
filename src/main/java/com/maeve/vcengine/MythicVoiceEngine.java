@@ -1,6 +1,8 @@
 package com.maeve.vcengine;
 
 import com.maeve.vcengine.command.MvhCommand;
+import com.maeve.vcengine.mythic.VoiceMobNotifier;
+import com.maeve.vcengine.mythic.VoiceTriggers;
 import com.maeve.vcengine.voice.VoiceDetectionListener;
 import de.maxhenkel.voicechat.api.BukkitVoicechatService;
 import org.bukkit.command.PluginCommand;
@@ -8,8 +10,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class MythicVoiceEngine extends JavaPlugin {
     private VoiceDetectionListener voiceDetectionListener;
+    private VoiceMobNotifier mobNotifier;
     private volatile boolean voiceEnabled;
     private volatile boolean debugEnabled;
+    private boolean mobTriggersEnabled;
     private double normalRadius;
     private double whisperRadius;
     private long debugCooldownMillis;
@@ -19,12 +23,14 @@ public final class MythicVoiceEngine extends JavaPlugin {
     public void onEnable() {
         saveDefaultConfig();
         voiceEnabled = getConfig().getBoolean("voice.enabled", true);
+        mobTriggersEnabled = getConfig().getBoolean("voice.trigger-mobs", true);
         debugEnabled = getConfig().getBoolean("voice.debug", false);
         normalRadius = Math.max(0.0, getConfig().getDouble("voice.normal-radius", 16.0));
         whisperRadius = Math.max(0.0, getConfig().getDouble("voice.whisper-radius", 5.0));
         debugCooldownMillis = Math.max(0L, getConfig().getLong("voice.debug-cooldown-ms", 500L));
         packetProcessingIntervalMillis = Math.max(50L, getConfig().getLong("voice.packet-processing-interval-ms", 250L));
 
+        mobNotifier = new VoiceMobNotifier();
         voiceDetectionListener = new VoiceDetectionListener(this);
         BukkitVoicechatService voicechatService = getServer().getServicesManager().load(BukkitVoicechatService.class);
 
@@ -34,6 +40,7 @@ public final class MythicVoiceEngine extends JavaPlugin {
             return;
         }
 
+        VoiceTriggers.register();
         voicechatService.registerPlugin(voiceDetectionListener);
 
         PluginCommand command = getCommand("mvh");
@@ -46,6 +53,14 @@ public final class MythicVoiceEngine extends JavaPlugin {
 
     public boolean isVoiceEnabled() {
         return voiceEnabled;
+    }
+
+    public boolean isMobTriggersEnabled() {
+        return mobTriggersEnabled;
+    }
+
+    public VoiceMobNotifier getMobNotifier() {
+        return mobNotifier;
     }
 
     public boolean isDebugEnabled() {

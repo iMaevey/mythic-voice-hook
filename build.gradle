@@ -31,6 +31,7 @@ dependencies {
     // Use this dependency if you don't want to compile bukkit
     implementation "io.papermc.paper:paper-api:${bukkit_version}"
     implementation "de.maxhenkel.voicechat:voicechat-api:${voicechat_api_version}"
+    compileOnly "io.lumine:Mythic-Dist:${mythic_version}"
 }
 
 repositories {
@@ -38,6 +39,10 @@ repositories {
     maven {
         name = "henkelmax.public"
         url = 'https://maven.maxhenkel.de/repository/public'
+    }
+    maven {
+        name = "lumine"
+        url = 'https://mvn.lumine.io/repository/maven-public/'
     }
     // You need this maven repository if you want to use the paper dependency
     maven {

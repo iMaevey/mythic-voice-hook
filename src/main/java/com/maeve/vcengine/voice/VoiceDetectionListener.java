@@ -4,6 +4,7 @@ import de.maxhenkel.voicechat.api.VoicechatPlugin;
 import de.maxhenkel.voicechat.api.events.EventRegistration;
 import de.maxhenkel.voicechat.api.events.MicrophonePacketEvent;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import com.maeve.vcengine.MythicVoiceEngine;
@@ -70,12 +71,14 @@ public final class VoiceDetectionListener implements VoicechatPlugin {
                 System.currentTimeMillis()
         );
 
+        int alerted = plugin.isMobTriggersEnabled() ? plugin.getMobNotifier().alertNearbyMobs(soundEvent, player) : 0;
+
         if (plugin.isDebugEnabled()) {
-            logDetection(soundEvent);
+            logDetection(soundEvent, alerted);
         }
     }
 
-    private void logDetection(VoiceSoundEvent event) {
+    private void logDetection(VoiceSoundEvent event, int alerted) {
         long now = event.timestamp();
         long previous = lastDebugOutput.getOrDefault(event.playerId(), 0L);
         if (now - previous < plugin.getDebugCooldownMillis()) {
@@ -85,14 +88,15 @@ public final class VoiceDetectionListener implements VoicechatPlugin {
         lastDebugOutput.put(event.playerId(), now);
         Location location = event.location();
         plugin.getLogger().info(String.format(
-                "Voice detected: player=%s mode=%s location=%s %.2f %.2f %.2f radius=%.1f",
+                "Voice detected: player=%s mode=%s location=%s %.2f %.2f %.2f radius=%.1f mobs=%d",
                 event.playerName(),
                 event.whispering() ? "whisper" : "normal",
                 location.getWorld() == null ? "unknown" : location.getWorld().getName(),
                 location.getX(),
                 location.getY(),
                 location.getZ(),
-                event.hearingRadius()
+                event.hearingRadius(),
+                alerted
         ));
     }
 }

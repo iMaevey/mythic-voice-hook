@@ -1,5 +1,6 @@
 voice:
   enabled: true
+  trigger-mobs: true
   normal-radius: 16.0 # make sure to update this to your values (TO-DO: Use SVC plugin settings?)
   whisper-radius: 5.0 # make sure to update this to your values (TO-DO: Use SVC plugin settings?)
   debug: false
