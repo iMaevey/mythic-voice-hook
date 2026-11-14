@@ -2,10 +2,14 @@ plugins {
     id 'java'
 }
 
-sourceCompatibility = JavaLanguageVersion.of(java_version as int)
-targetCompatibility = JavaLanguageVersion.of(java_version as int)
+java {
+    sourceCompatibility = JavaVersion.toVersion(java_version)
+    targetCompatibility = JavaVersion.toVersion(java_version)
+}
 
-archivesBaseName = archives_base_name
+base {
+    archivesName = archives_base_name
+}
 version = plugin_version
 group = maven_group
 
