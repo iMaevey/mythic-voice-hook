@@ -57,7 +57,7 @@ public final class VoiceDetectionListener implements VoicechatPlugin {
 
     private void processVoicePacket(UUID playerId, boolean whispering, double radius) {
         Player player = Bukkit.getPlayer(playerId);
-        if (player == null || !player.isOnline()) {
+        if (player == null || !player.isOnline() || player.isDead() || player.getGameMode() == GameMode.SPECTATOR) {
             return;
         }
 
