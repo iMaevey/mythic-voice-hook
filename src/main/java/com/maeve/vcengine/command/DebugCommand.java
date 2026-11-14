@@ -1,6 +1,6 @@
 package com.maeve.vcengine.command;
 
-import com.maeve.vcengine.MythicSoundEngine;
+import com.maeve.vcengine.MythicVoiceEngine;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -8,9 +8,9 @@ import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 
 public final class MvhCommand implements CommandExecutor {
-    private final MythicSoundEngine plugin;
+    private final MythicVoiceEngine plugin;
 
-    public MvhCommand(MythicSoundEngine plugin) {
+    public MvhCommand(MythicVoiceEngine plugin) {
         this.plugin = plugin;
     }
 

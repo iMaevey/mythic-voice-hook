@@ -6,24 +6,24 @@ import de.maxhenkel.voicechat.api.events.MicrophonePacketEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import com.maeve.vcengine.MythicSoundEngine;
+import com.maeve.vcengine.MythicVoiceEngine;
 
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 public final class VoiceDetectionListener implements VoicechatPlugin {
-    private final MythicSoundEngine plugin;
+    private final MythicVoiceEngine plugin;
     private final Map<UUID, Long> lastDebugOutput = new ConcurrentHashMap<>();
     private final Map<UUID, Long> lastScheduled = new ConcurrentHashMap<>();
 
-    public VoiceDetectionListener(MythicSoundEngine plugin) {
+    public VoiceDetectionListener(MythicVoiceEngine plugin) {
         this.plugin = plugin;
     }
 
     @Override
     public String getPluginId() {
-        return "MythicSoundEngine";
+        return "MythicVoiceEngine";
     }
 
     @Override
