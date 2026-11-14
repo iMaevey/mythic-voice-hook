@@ -2,7 +2,7 @@ name: mythic-voice-hook
 version: ${version}
 main: com.maeve.vcengine.MythicVoiceEngine
 api-version: ${bukkit_api_version}
-prefix: example_plugin
+prefix: mythic-voice-hook
 authors: [ "Example Author" ]
 description: Adds custom MythicMobs triggers that make use of the Simple Voice Chat API
 depend: [ voicechat, MythicMobs ]
